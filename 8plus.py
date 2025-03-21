@@ -4,7 +4,7 @@ import sys
 
 def move_folders_with_many_files(source_dir, destination_dir, min_file_count=8):
 
-    #Check if source directory exists
+    #check if source directory exists
     if not os.path.exists(source_dir):
         print(f"Error: Source directory '{source_dir}' does not exist.")
         return
