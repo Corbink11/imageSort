@@ -3,21 +3,13 @@ import shutil
 import sys
 
 def move_folders_with_many_files(source_dir, destination_dir, min_file_count=8):
-    """
-    Checks all folders in source_dir and moves those containing min_file_count or more files
-    to destination_dir.
-    
-    Args:
-        source_dir (str): Path to source directory to check
-        destination_dir (str): Path to destination directory where folders will be moved
-        min_file_count (int): Minimum number of files required to move a folder (default: 8)
-    """
-    # Check if source directory exists
+
+    #Check if source directory exists
     if not os.path.exists(source_dir):
         print(f"Error: Source directory '{source_dir}' does not exist.")
         return
     
-    # Create destination directory if it doesn't exist
+    #Create destination directory if it doesn't exist
     if not os.path.exists(destination_dir):
         try:
             os.makedirs(destination_dir)
@@ -26,10 +18,10 @@ def move_folders_with_many_files(source_dir, destination_dir, min_file_count=8):
             print(f"Error creating destination directory: {e}")
             return
     
-    # Track statistics
+    #Track statistics
     moved_folders = 0
     
-    # Iterate through items in the source directory
+    #Iterate through items in the source directory
     for item in os.listdir(source_dir):
         item_path = os.path.join(source_dir, item)
         
@@ -66,7 +58,7 @@ if __name__ == "__main__":
     source_dir = sys.argv[1]
     destination_dir = sys.argv[2]
     
-    # Optional third argument for minimum file count
+    #Optional third argument for minimum file count
     min_file_count = 8
     if len(sys.argv) > 3:
         try:
