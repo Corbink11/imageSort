@@ -2,31 +2,31 @@ import os
 import csv
 import re
 
-# Function to sanitize directory names
+#Function to edit invalid directory names
 def sanitize_directory_name(name):
     # Replace invalid characters with an underscore
     return re.sub(r'[<>:"/\\|?*]', '_', name)
 
-# Function to sanitize file names
+#Function to edit invalid file names
 def sanitize_file_name(name):
     # Replace invalid characters with an underscore and limit the length
     return re.sub(r'[<>:"/\\|?*]', '_', name)[:255]
 
-# Create a directory for each Primary ID and save images
+#Create a directory for each Primary ID and save images
 def create_directories_and_save_images(csv_file, base_directory):
     try:
-        # Read the CSV file
+        #Read the CSV file
         with open(csv_file, 'r') as file:
             reader = csv.DictReader(file)
             
-            # Iterate through each row in the CSV file
+            #Iterate through each row in the CSV file
             for row in reader:
                 primary_id = row['Primary ID']
                 
-                # Sanitize the directory name
+                #Editthe directory name
                 sanitized_primary_id = sanitize_directory_name(primary_id)
                 
-                # Create a directory for the Primary ID inside the base directory if it doesn't exist
+                #Create a directory for the Primary ID inside the base directory if it doesn't exist
                 primary_id_directory = os.path.join(base_directory, sanitized_primary_id)
                 try:
                     os.makedirs(primary_id_directory, exist_ok=True)
@@ -34,7 +34,7 @@ def create_directories_and_save_images(csv_file, base_directory):
                     print(f"Error creating directory {primary_id_directory}: {e}")
                     continue
                 
-                # Iterate through each column in the row
+                #Iterate through each column in the row
                 for column, value in row.items():
                     if 'Image' in column and value:
                         try:
@@ -51,11 +51,11 @@ def create_directories_and_save_images(csv_file, base_directory):
     except Exception as e:
         print(f"An unexpected error occurred: {e}")
 
-# Specify the CSV file name and base directory
+#specify the CSV file name and base directory
 csv_file = 'Image Audit (4).csv'
 base_directory = r'C:\Users\\ckennedy\\Documents\\scripts\\PrimaryDigitalImages'
 
-# Create directories and save images
+#Create directories and save images
 create_directories_and_save_images(csv_file, base_directory)
 
 print("Directories created and images saved successfully.")
